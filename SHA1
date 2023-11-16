@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main() {
+    char input[] = "Hello, SHA-256!";
+    uint8_t hash[32];
+
+    (input, strlen(input), hash);
+    printf("Input: %s\n", input);
+    printf("Hash: ");
+    for (int i = 0; i < 32; i++) {
+        printf("%02x", hash[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
