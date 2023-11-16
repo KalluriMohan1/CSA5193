@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+int power(int base, int exponent, int modulus)
+ {
+    int result = 1;
+    while (exponent > 0) 
+
+	{
+        if (exponent % 2 == 1) 
+		{
+            result = (result * base) % modulus;
+        }
+        base = (base * base) % modulus;
+        exponent /= 2;
+    }
+    return result;
+}
+
+int main()
+ {
+    int prime, primitiveRoot; 
+    int privateA, privateB;   
+
+    printf("Enter the prime number: ");
+    scanf("%d", &prime);
+
+    printf("Enter the primitive root: ");
+    scanf("%d", &primitiveRoot);
+
+    printf("Enter private key for party A: ");
+    scanf("%d", &privateA);
+    printf("Enter private key for party B: ");
+    scanf("%d", &privateB);
+    int publicA = power(primitiveRoot, privateA, prime);
+    int publicB = power(primitiveRoot, privateB, prime);
+    int secretA = power(publicB, privateA, prime);
+    int secretB = power(publicA, privateB, prime);
+    printf("Party A's public key: %d\n", publicA);
+    printf("Party B's public key: %d\n", publicB);
+    printf("Shared secret key calculated by A: %d\n", secretA);
+    printf("Shared secret key calculated by B: %d\n", secretB);
+    return 0;
+}
